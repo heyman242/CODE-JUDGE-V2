@@ -9,19 +9,20 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 //ROUTERS
-
-
-app.use(morgan("dev"));
-app.use(express.json());
-
-app.post("/", (req, res) => {
-  console.log(req);
-  res.json({ msg: "data sent", data: req.body });
-});
+import authRouter from './routes/authRouter.js'
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+app.use(morgan("dev"));
+app.use(express.json());
+
+app.use("/api/v1/auth", authRouter);
+
+app.use("*", (req, res) => {
+  res.status(404).json({ msg: "not found" });
+});
 
 const port = process.env.PORT || 5100;
 try {
