@@ -1,6 +1,7 @@
 import Wrapper from "../assets/wrappers/Landing";
 import { Link } from "react-router-dom";
 import { Logo } from "../components";
+import main from "../assets/images/main.svg";
 
 const Landing = () => {
   return (
@@ -13,9 +14,7 @@ const Landing = () => {
           <h1>
             Code <span>Judge</span>
           </h1>
-          <p>
-            welcome to the code judge
-          </p>
+          <p>welcome to the code judge</p>
           <Link to="/register" className="btn register-link">
             register
           </Link>
@@ -23,7 +22,7 @@ const Landing = () => {
             login / Demo User
           </Link>
         </div>
-        
+        <img src={main} alt="Online stats" className="img main-img" />
       </div>
     </Wrapper>
   );
