@@ -9,7 +9,9 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 //ROUTERS
-import authRouter from './routes/authRouter.js'
+import authRouter from "./routes/authRouter.js";
+import userRouter from "./routes/userRouter.js";
+import { authenticateUser } from "./middleware/authMiddleware.js";
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -17,8 +19,10 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(cookieParser());
 
-app.use("/api/v1/auth", authRouter);
+app.use("/api/v2/user", authenticateUser, userRouter);
+app.use("/api/v2/auth", authRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });
