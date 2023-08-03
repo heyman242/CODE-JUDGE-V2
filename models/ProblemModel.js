@@ -1,8 +1,17 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
+const TestcaseSchema = new mongoose.Schema({
+  input: {
+    type: String,
+    required: true,
+  },
+  output: {
+    type: String,
+    required: true,
+  },
+});
 
-const problemSchema = new Schema({
+const ProblemSchema = new mongoose.Schema({
   problemName: {
     type: String,
     required: true,
@@ -25,14 +34,10 @@ const problemSchema = new Schema({
     enum: ["easy", "medium", "hard"],
     required: true,
   },
-  testInputs: {
-    type: [Schema.Types.Mixed],
-    required: true,
-  },
-  testOutputs: {
-    type: [Schema.Types.Mixed],
+  testCases: {
+    type: [TestcaseSchema],
     required: true,
   },
 });
 
-module.exports = mongoose.model("Problem", problemSchema);
+export default mongoose.model("Problem", ProblemSchema);
