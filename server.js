@@ -11,6 +11,7 @@ const app = express();
 //ROUTERS
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
+import problemRouter from "./routes/problemRouter.js";
 import { authenticateUser } from "./middleware/authMiddleware.js";
 
 if (process.env.NODE_ENV === "development") {
@@ -23,6 +24,7 @@ app.use(cookieParser());
 
 app.use("/api/v2/user", authenticateUser, userRouter);
 app.use("/api/v2/auth", authRouter);
+app.use("/api/v2/problem", problemRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });
