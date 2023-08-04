@@ -7,8 +7,8 @@ import {
   getSingleProblem,
 } from "../controllers/problemController.js";
 
-router.route("/").post(addProblem).get(getProblem);
-router.route('/:problemId').get(getSingleProblem);
+router.route("/:userId").post(addProblem).get(getProblem);
+router.route('/:userId/:problemId').get(getSingleProblem);
 
 
 

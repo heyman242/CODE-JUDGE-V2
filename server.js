@@ -12,6 +12,7 @@ const app = express();
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
 import problemRouter from "./routes/problemRouter.js";
+import submissionRouter from "./routes/submissionRouter.js";
 import { authenticateUser } from "./middleware/authMiddleware.js";
 
 if (process.env.NODE_ENV === "development") {
@@ -24,7 +25,9 @@ app.use(cookieParser());
 
 app.use("/api/v2/user", authenticateUser, userRouter);
 app.use("/api/v2/auth", authRouter);
-app.use("/api/v2/problem", problemRouter);
+app.use("/api/v2/problem", authenticateUser, problemRouter);
+app.use("/api/v2/submission", authenticateUser, submissionRouter);
+
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });
