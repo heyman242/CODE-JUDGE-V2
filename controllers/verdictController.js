@@ -30,3 +30,24 @@ export const Verdict = async (req, res) => {
     return res.status(500).json({ success: false, error: JSON.stringify(err) });
   }
 };
+
+export const getStatus = async (req, res) => {
+  const jobId = req.query.id;
+  console.log("status requested", jobId);
+
+  if (jobId == undefined) {
+    return res
+      .status(400)
+      .json({ success: false, error: "missing id query param" });
+  }
+
+  try {
+    const job = await Submission.findById(jobId).exec();
+    if (!job) {
+      return res.status(400).json({ success: false, error: "invalid job id" });
+    }
+    return res.status(200).json({ success: true, job });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: `${err}` });
+  }
+};
