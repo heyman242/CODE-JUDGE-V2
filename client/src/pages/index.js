@@ -9,3 +9,4 @@ export { default as  AddQuestion} from "./AddQuestion";
 export { default as  Profile} from "./Profile";
 export { default as  Stats} from "./Stats";
 export { default as  Admin} from "./Admin";
+export { default as  Solve} from "./Solve";

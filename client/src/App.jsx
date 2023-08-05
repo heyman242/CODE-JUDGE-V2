@@ -12,10 +12,12 @@ import {
   AddQuestion,
   Profile,
   Admin,
+  Solve,
 } from "./pages";
 
-import {action as registerAction} from './pages/Register';
-import {action as loginAction} from './pages/Login';
+import { action as registerAction } from "./pages/Register";
+import { action as loginAction } from "./pages/Login";
+
 
 const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -52,6 +54,11 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <AllQuestions />,
+          },
+          {
+            path: "problem/:problemId",
+            element: <Solve />,
+            
           },
           { path: "stats", element: <Stats /> },
           {
