@@ -4,12 +4,10 @@ const SubmissionSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Types.ObjectId,
     ref: "User",
-    required: true,
   },
   problemId: {
     type: mongoose.Types.ObjectId,
     ref: "Problem",
-    required: true,
   },
   language: {
     type: String,
@@ -18,11 +16,16 @@ const SubmissionSchema = new mongoose.Schema({
   },
   code: {
     type: String,
-    required: true,
   },
   filePath: {
     type: String,
     required: true,
+  },
+  startedAt: {
+    type: Date,
+  },
+  output: {
+    type: String,
   },
   submittedAt: {
     type: Date,
@@ -35,4 +38,4 @@ const SubmissionSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Submission", SubmissionSchema)
+export default mongoose.model("Submission", SubmissionSchema);

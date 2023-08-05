@@ -1,14 +1,8 @@
 import mongoose from "mongoose";
 
-const TestcaseSchema = new mongoose.Schema({
-  input: {
-    type: String,
-    required: true,
-  },
-  output: {
-    type: String,
-    required: true,
-  },
+const TestCaseSchema = new mongoose.Schema({
+  input: [mongoose.Schema.Types.Mixed],
+  output: [mongoose.Schema.Types.Mixed],
 });
 
 const ProblemSchema = new mongoose.Schema({
@@ -35,7 +29,7 @@ const ProblemSchema = new mongoose.Schema({
     required: true,
   },
   testCases: {
-    type: [TestcaseSchema],
+    type: TestCaseSchema,
     required: true,
   },
 });
