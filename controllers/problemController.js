@@ -8,7 +8,7 @@ export const addProblem = async (req, res) => {
 
 export const getProblem = async (req, res) => {
   const problem = await Problem.find({}).select("problemName level");
-  res.status(StatusCodes.OK).json({ problems: problem });
+  res.status(StatusCodes.OK).json({ problem });
 };
 
 export const getSingleProblem = async (req, res) => {

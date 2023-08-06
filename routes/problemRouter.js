@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from "express";
 const router = Router();
 
 import {
@@ -7,13 +7,7 @@ import {
   getSingleProblem,
 } from "../controllers/problemController.js";
 
-router.route("/:userId").post(addProblem).get(getProblem);
-router.route('/:userId/:problemId').get(getSingleProblem);
-
-
-
-
-
-
+router.route("/").post(addProblem).get(getProblem);
+router.route("/:problemId").get(getSingleProblem);
 
 export default router;

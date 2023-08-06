@@ -23,10 +23,12 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
 
+
+
 app.use("/api/v2/user", authenticateUser, userRouter);
 app.use("/api/v2/auth", authRouter);
-app.use("/api/v2/problem", authenticateUser, problemRouter);
-app.use("/api/v2/submission", authenticateUser, submissionRouter);
+app.use("/api/v2/problem", problemRouter);
+app.use("/api/v2/submission", submissionRouter);
 
 
 app.use("*", (req, res) => {
