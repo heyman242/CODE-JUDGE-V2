@@ -1,6 +1,6 @@
 import Problem from "../models/ProblemModel.js";
 import Submission from "../models/SubmissionModel.js";
-import { StatusCodes } from "http-status-codes";
+import { REQUEST_URI_TOO_LONG, StatusCodes } from "http-status-codes";
 import generateFile from "../codeCompilation/generateFile.js";
 import addJobQueue from "../codeCompilation/jobQueue.js";
 import jwt from "jsonwebtoken";
@@ -51,6 +51,7 @@ export const getStatus = async (req, res) => {
 
   try {
     const job = await Submission.findById(jobId).exec();
+    console.log(job);
     if (!job) {
       return res
         .status(400)

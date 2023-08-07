@@ -13,6 +13,7 @@ import {
   Profile,
   Admin,
   Solve,
+  Result,
 } from "./pages";
 
 import { action as registerAction } from "./pages/Register";
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             path: "problem/:problemId",
             element: <Solve />,
             
+          },
+          {
+            path :"submission/status/:id",
+            element:<Result/>
           },
           { path: "stats", element: <Stats /> },
           {
