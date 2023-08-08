@@ -59,11 +59,10 @@ const router = createBrowserRouter([
           {
             path: "problem/:problemId",
             element: <Solve />,
-            
           },
           {
-            path :"submission/status/:id",
-            element:<Result/>
+            path: "submission/status/:submissionId",
+            element: <Result />,
           },
           { path: "stats", element: <Stats /> },
           {

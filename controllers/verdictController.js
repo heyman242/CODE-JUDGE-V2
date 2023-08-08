@@ -40,17 +40,17 @@ export const Verdict = async (req, res) => {
 };
 
 export const getStatus = async (req, res) => {
-  const jobId = req.query.id;
-  console.log("Status requested for jobId:", jobId);
+  const { submissionId } = req.params; // Extract submissionId from request parameters
+  console.log("Status requested for jobId:", submissionId);
 
-  if (!jobId) {
+  if (!submissionId) {
     return res
       .status(400)
       .json({ success: false, message: "Missing id query param" });
   }
 
   try {
-    const job = await Submission.findById(jobId).exec();
+    const job = await Submission.findById(submissionId); // Use submissionId to find the Submission
     console.log(job);
     if (!job) {
       return res
@@ -61,12 +61,10 @@ export const getStatus = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Job status fetched successfully", job });
   } catch (err) {
-    return res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error fetching job status",
-        error: err.message,
-      });
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching job status",
+      error: err.message,
+    });
   }
 };
