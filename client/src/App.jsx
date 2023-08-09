@@ -68,6 +68,7 @@ const router = createBrowserRouter([
           {
             path: "all-jobs",
             element: <AddQuestion />,
+            
           },
 
           {
