@@ -30,7 +30,7 @@ jobQueue.process(NUM_WORKERS, async ({ data }) => {
   } catch (err) {
     console.log("response: ", err);
     job["completedAt"] = new Date();
-    job["status"] = "Wrong Answer";
+    job["status"] = "Wrong_Answer";
     job["output"] = JSON.stringify(err);
     await job.save();
   }

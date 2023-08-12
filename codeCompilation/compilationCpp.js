@@ -81,7 +81,7 @@ function compilationCpp(testCases, directory) {
                   const result = await execution(input[index], newId);
                   if (result !== output[index]) {
                     return reject({
-                      status: "Wrong Answer",
+                      status: "Wrong_Answer",
                       msg: `incorrect output at test case ${index + 1}`,
                       input: `${input[index]}`,
                       output: `${output[index]}`,
