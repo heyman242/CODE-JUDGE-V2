@@ -18,7 +18,7 @@ import {
 
 import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
-
+import { loader as statsLoader } from "./pages/Stats";
 
 const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -64,11 +64,10 @@ const router = createBrowserRouter([
             path: "submission/status/:submissionId",
             element: <Result />,
           },
-          { path: "stats", element: <Stats /> },
+          { path: "stats", element: <Stats />, loader: statsLoader },
           {
             path: "all-jobs",
             element: <AddQuestion />,
-            
           },
 
           {

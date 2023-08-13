@@ -7,3 +7,5 @@ export {default as NavLinks} from './NavLinks';
 export {default as LogoutContainer} from './LogoutContainer';
 export {default as ThemeToggle} from './ThemeToggle';
 export {default as SubmitBtn} from './submitBtn';
+export { default as StatItem } from "./StatItem";
+export { default as StatsContainer } from "./StatsContainer";
