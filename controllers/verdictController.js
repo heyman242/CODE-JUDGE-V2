@@ -4,6 +4,7 @@ import generateFile from "../codeCompilation/generateFile.js";
 import addJobQueue from "../codeCompilation/jobQueue.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import ProblemModel from "../models/ProblemModel.js";
 
 export const Verdict = async (req, res) => {
   const { code, language } = req.body;
@@ -18,6 +19,8 @@ export const Verdict = async (req, res) => {
   const token = req.cookies.token;
 
   try {
+    const problem = await ProblemModel.findById(problemId) 
+    const problemName = problem.problemName;
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.userId;
     console.log(userId);
@@ -28,6 +31,7 @@ export const Verdict = async (req, res) => {
       filePath,
       userId,
       problemId,
+      problemName,
     }).save();
     const jobId = job["_id"];
 
@@ -104,7 +108,10 @@ export const showStats = async (req, res) => {
       Wrong_Answer: wrongAnswerCount,
     };
 
-    res.status(StatusCodes.OK).json({ defaultStats });
+    const submissions = await Submission.find({userId : userId});
+    
+
+    res.status(StatusCodes.OK).json({ defaultStats, submissions });
   } catch (error) {
     console.error(error);
     res

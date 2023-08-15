@@ -36,6 +36,9 @@ const SubmissionSchema = new mongoose.Schema({
     default: "pending",
     enum: ["pending", "Accepted", "Wrong_Answer"],
   },
+  problemName: {
+    type: String,
+  },
 });
 
 export default mongoose.model("Submission", SubmissionSchema);

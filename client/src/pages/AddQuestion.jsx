@@ -14,8 +14,6 @@ const AddQuestionForm = styled.form`
   margin: 0 auto;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-
   h3 {
     margin: 0;
   }
@@ -33,25 +31,29 @@ const AddQuestionForm = styled.form`
   select {
     font-size: 16px;
   }
-
-  .test-cases-box {
-    
-    border-radius: 8px;
-    padding: 20px;
-  }
-
-  .test-case {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
   }
 `;
 
-const AddQuestion = () => {
-  
+const TestCasesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 
+const TestCaseRow = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
+
+const AddQuestion = () => {
   const [problemData, setProblemData] = useState({
     problemName: "",
     problemStatement: "",
@@ -59,8 +61,8 @@ const AddQuestion = () => {
     sampleOutputs: "",
     level: "easy",
     testCases: {
-      input: ["", "", "", "", "", ""],
-      output: ["", "", "", "", "", ""],
+      input: ["", "", "", "", "", "", "", "", "", ""],
+      output: ["", "", "", "", "", "", "", "", "", ""],
     },
   });
 
@@ -70,7 +72,7 @@ const AddQuestion = () => {
     try {
       await customFetch.post(`/problem/`, problemData);
       toast.success("Problem added successfully");
-     redirect("/dashboard"); 
+      redirect("/dashboard");
     } catch (error) {
       toast.error(error?.response?.data?.msg);
     }
@@ -109,7 +111,7 @@ const AddQuestion = () => {
         value={problemData.problemStatement}
         onChange={handleInputChange}
         required
-        rows="8" 
+        rows="8"
       />
       <input
         type="text"
@@ -137,31 +139,35 @@ const AddQuestion = () => {
         <option value="hard">Hard</option>
       </select>
 
-      <div className="test-cases-box">
+      <TestCasesContainer>
         {problemData.testCases.input.map((input, index) => (
-          <div className="test-case" key={index}>
-            <h4>Test Case {index + 1}</h4>
-            <textarea
-              name={`testCases.input[${index}]`}
-              placeholder={`Input for Test Case ${index + 1}`}
-              value={input}
-              onChange={(e) =>
-                handleTestCasesChange(index, "input", e.target.value)
-              }
-              required
-            />
-            <textarea
-              name={`testCases.output[${index}]`}
-              placeholder={`Output for Test Case ${index + 1}`}
-              value={problemData.testCases.output[index]}
-              onChange={(e) =>
-                handleTestCasesChange(index, "output", e.target.value)
-              }
-              required
-            />
-          </div>
+          <TestCaseRow key={index}>
+            <div className="test-case">
+              <textarea
+                name={`testCases.input[${index}]`}
+                placeholder={`Input for Test Case ${index + 1}`}
+                value={input}
+                onChange={(e) =>
+                  handleTestCasesChange(index, "input", e.target.value)
+                }
+                required
+              />
+            </div>
+
+            <div className="test-case">
+              <textarea
+                name={`testCases.output[${index}]`}
+                placeholder={`Output for Test Case ${index + 1}`}
+                value={problemData.testCases.output[index]}
+                onChange={(e) =>
+                  handleTestCasesChange(index, "output", e.target.value)
+                }
+                required
+              />
+            </div>
+          </TestCaseRow>
         ))}
-      </div>
+      </TestCasesContainer>
 
       <button type="submit">Submit</button>
     </AddQuestionForm>
